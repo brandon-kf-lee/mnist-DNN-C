@@ -14,7 +14,7 @@ const char * test_images_file = "data/t10k-images-idx3-ubyte";
 const char * test_labels_file = "data/t10k-labels-idx1-ubyte";
 
 /**
- * Calculate the accuracy of the predictions of a neural network on a dataset.
+ * Run inference through the neural network and calculate their accuracy.
  */
 float calculate_accuracy(mnist_dataset_t * dataset, neural_network_t * network)
 {
@@ -53,7 +53,7 @@ int main(int argc, char *argv[]){
     test_dataset = mnist_get_dataset(test_images_file, test_labels_file);
 
     // Load the pre-trained network
-    FILE * mnist_network = fopen("mnist_network", "rb");
+    FILE * mnist_network = fopen("mnist_network.bin", "rb");
     fread(&network, sizeof(network), 1, mnist_network);
     fclose(mnist_network);
 

@@ -1,6 +1,14 @@
+/* 
+ * Defines structs and functions for reading MNIST data
+ * Author: Brandon Lee, brandon.kf.lee@gmail.com
+ *     Derived from: Andrew Carter, https://github.com/AndrewCarterUK/mnist-neural-network-plain-c
+ */ 
+
 #ifndef MNIST_FILE_H_
 #define MNIST_FILE_H_
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <stdint.h>
 
 #define MNIST_LABEL_MAGIC 0x00000801

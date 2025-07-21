@@ -1,6 +1,8 @@
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
+/* 
+ * Implements training and prediction routines for a simple neural network
+ * Author: Brandon Lee, brandon.kf.lee@gmail.com
+ *     Derived from: Andrew Carter, https://github.com/AndrewCarterUK/mnist-neural-network-plain-c
+ */ 
 
 #include "include/mnist_file.h"
 #include "include/neural_network.h"

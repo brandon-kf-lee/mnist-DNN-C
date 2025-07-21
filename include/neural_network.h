@@ -1,5 +1,15 @@
+/* 
+ * Defines structs and functions for the neural network
+ * Author: Brandon Lee, brandon.kf.lee@gmail.com
+ *     Derived from: Andrew Carter, https://github.com/AndrewCarterUK/mnist-neural-network-plain-c
+ */ 
+
 #ifndef NEURAL_NETWORK_H_
 #define NEURAL_NETWORK_H_
+
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
 
 #include "mnist_file.h"
 

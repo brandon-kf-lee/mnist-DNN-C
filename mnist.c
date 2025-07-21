@@ -1,7 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <math.h>
+/* 
+ * Glue code that runs the algorithm steps and reports algorithm accuracy
+ * Author: Brandon Lee, brandon.kf.lee@gmail.com
+ *     Derived from: Andrew Carter, https://github.com/AndrewCarterUK/mnist-neural-network-plain-c
+ */ 
 
 #include "include/mnist_file.h"
 #include "include/neural_network.h"

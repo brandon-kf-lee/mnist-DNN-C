@@ -1,6 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
+/* 
+ * Retrieves images and labels from the MNIST dataset
+ * Author: Brandon Lee, brandon.kf.lee@gmail.com
+ *     Derived from: Andrew Carter, https://github.com/AndrewCarterUK/mnist-neural-network-plain-c
+ */ 
 
 #include "include/mnist_file.h"
 

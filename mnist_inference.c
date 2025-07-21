@@ -1,5 +1,5 @@
 /* 
- * Glue code that runs the algorithm steps and reports algorithm accuracy
+ * Glue code that uses pre-trained weights and reports algorithm accuracy
  * Author: Brandon Lee, brandon.kf.lee@gmail.com
  *     Derived from: Andrew Carter, https://github.com/AndrewCarterUK/mnist-neural-network-plain-c
  */ 
@@ -7,14 +7,9 @@
 #include "include/mnist_file.h"
 #include "include/neural_network.h"
 
-#define STEPS 1000
-#define BATCH_SIZE 100
-
 /**
  * Downloaded from: http://yann.lecun.com/exdb/mnist/
  */
-const char * train_images_file = "data/train-images-idx3-ubyte";
-const char * train_labels_file = "data/train-labels-idx1-ubyte";
 const char * test_images_file = "data/t10k-images-idx3-ubyte";
 const char * test_labels_file = "data/t10k-labels-idx1-ubyte";
 
@@ -49,39 +44,24 @@ float calculate_accuracy(mnist_dataset_t * dataset, neural_network_t * network)
     return ((float) correct) / ((float) dataset->size);
 }
 
-int main(int argc, char *argv[])
-{
-    mnist_dataset_t * train_dataset, * test_dataset;
-    mnist_dataset_t batch;
+int main(int argc, char *argv[]){
+
+    mnist_dataset_t * test_dataset;
     neural_network_t network;
-    float loss, accuracy;
-    int i, batches;
 
     // Read the datasets from the files
-    train_dataset = mnist_get_dataset(train_images_file, train_labels_file);
     test_dataset = mnist_get_dataset(test_images_file, test_labels_file);
 
-    // Initialise weights and biases with random values
-    neural_network_random_weights(&network);
+    // Load the pre-trained network
+    FILE * mnist_network = fopen("mnist_network", "rb");
+    fread(&network, sizeof(network), 1, mnist_network);
+    fclose(mnist_network);
 
-    // Calculate how many batches (so we know when to wrap around)
-    batches = train_dataset->size / BATCH_SIZE;
+    // Calculate the accuracy using the test dataset
+    float accuracy = calculate_accuracy(test_dataset, &network);
+    printf("Accuracy: %.3f\n", accuracy);
 
-    for (i = 0; i < STEPS; i++) {
-        // Initialise a new batch
-        mnist_batch(train_dataset, &batch, 100, i % batches);
-
-        // Run one step of gradient descent and calculate the loss
-        loss = neural_network_training_step(&batch, &network, 0.5);
-
-        // Calculate the accuracy using the whole test dataset
-        accuracy = calculate_accuracy(test_dataset, &network);
-
-        printf("Step %04d\tAverage Loss: %.2f\tAccuracy: %.3f\n", i, loss / batch.size, accuracy);
-    }
-
-    // Cleanup
-    mnist_free_dataset(train_dataset);
+    //Cleanup
     mnist_free_dataset(test_dataset);
 
     return 0;
